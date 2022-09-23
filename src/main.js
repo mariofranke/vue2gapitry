@@ -7,6 +7,7 @@ import { createPinia, PiniaVuePlugin } from "pinia";
 
 Vue.use(PiniaVuePlugin);
 Vue.use(VueRouter);
+
 const router = new VueRouter({
   routes: Routes,
 });

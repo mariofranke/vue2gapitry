@@ -18,6 +18,7 @@ export const useDataStore = defineStore({
       ],
     }),
   }),
+
   getters: {
     getCalenderEntries: (state) => state.calender.for,
   },

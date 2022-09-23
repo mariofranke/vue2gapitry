@@ -17,13 +17,23 @@ export const useLoggedInUserStore = defineStore({
     }),
     accessToken: useStorage("accessToken", null),
     isLoggedIn: useStorage("isLoggedIn", false),
+    darkMode: useStorage("darkMode", true),
+    emails: useStorage("emails", []),
+    chatMessages: useStorage("chatMessages", []),
   }),
   getters: {
     getAccessToken: (state) => state.accessToken,
+    getUser: (state) => state.userData.email,
   },
   actions: {
     setUserData(userData) {
       this.userData = userData;
+    },
+    setEmails(emails) {
+      this.emails = emails;
+    },
+    setChatMessages(chatMessages) {
+      this.chatMessages = chatMessages;
     },
     setAccessToken(accessToken) {
       this.accessToken = accessToken;
@@ -33,6 +43,9 @@ export const useLoggedInUserStore = defineStore({
     },
     login() {
       this.isLoggedIn = true;
+    },
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
     },
   },
 });
