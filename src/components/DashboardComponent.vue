@@ -4,12 +4,13 @@
       <v-row>
 
         <v-col>
-          <h1 class="text-center grey--text">Adoption Indicators</h1>
+          <h1 class="text-center grey--text">Global Indicators</h1>
         </v-col>
       </v-row>
       <v-row>
 
         <ScoreCard
+            :percent="37"
             help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
                         Workspace and its tools.
                         Your usage data of Google-Workspace is used to determine your score.
@@ -19,41 +20,49 @@
             icon_color="yellow darken-2"
             metric="+5%"
             metric_text="since last week"
-            title="Overall npm in Adoption Score"
+            title="Workspace Experience Score"
         />
-
-
         <ScoreCard
-            help_btn="true"
-            help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
-            help_btn_text="Learn how to use Focus Time"
-            help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
-            help_title="Focus Time"
-            icon="mdi-headphones"
-            icon_color="blue darken-2"
-            metric="Hours: 2"
-            metric_text="this Week"
-            title="Focus time"/>
-
-        <ScoreCard
-            help_btn="true"
-            help_btn_scr="https://www.calendar.com/blog/perfect-amount-of-meetings-per-day-backed-by-science"
-            help_btn_text="Read More"
-            help_text='Excessive meetings can also result in information overload and a sense of failure.
-              As if that weren’t enough, they’re distracting and force you to multitask.
-              All of these aren’t good for your cognitive health.'
-            help_title="Meetings"
+            help_text='The Score shows your usage of Collaboration inside Google Workspace. The higher the score,
+                        the more you use the collaboration tools inside Google
+                        Workspace.
+                        Your interaction inside of Google-Workspace is used to determine your score.
+                        The kind and amount of Interaction are added up.'
+            help_title="Scoring"
             icon="mdi-account-group"
-            icon_color="blue darken-2"
-            metric="Hours: 4"
-            metric_text="this Week"
-            title="Time in meetings"/>
+            icon_color="yellow darken-2"
+            metric="+5%"
+            metric_text="since last week"
+            title="Collaboration Score"
+        />
+        <ScoreCard
+            :percent="20"
+            help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
+                        Workspace and its tools.
+                        Your usage data of Google-Workspace is used to determine your score.
+                        The kind and amount of Interaction are added up.'
+            help_title="Scoring"
+            icon="mdi-cellphone-link"
+            icon_color="yellow darken-2"
+            metric="+2%"
+            metric_text="since last week"
+            title="Mobility Score"
+        />
+      </v-row>
+      <v-row>
+
+        <v-col>
+          <h1 class="text-center grey--text">Application Adoption Indicators</h1>
+        </v-col>
+      </v-row>
+      <v-row>
 
 
       </v-row>
       <v-row>
 
         <ScoreCard
+            googlelogo="Gmail"
             help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
                         Workspace.
                         Your usage data of Google-Workspace is used to determine your score.
@@ -68,19 +77,102 @@
 
 
         <ScoreCard
-            help_btn="true"
+            googlelogo="Drive"
+            help_btn
             help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
             help_btn_text="Learn how to use Focus Time"
             help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
             help_title="Focus Time"
             icon="mdi-stove"
             icon_color="blue darken-2"
-            metric="Hours: 2"
-            metric_text="this Week"
+            metric="+5%"
+            metric_text="since last week"
             title="Drive Adoption"/>
 
         <ScoreCard
-            help_btn="true"
+            googlelogo="Meet"
+            help_btn
+            help_btn_scr="https://www.calendar.com/blog/perfect-amount-of-meetings-per-day-backed-by-science"
+            help_btn_text="Read More"
+            help_text=''
+            help_title=""
+            icon="mdi-account-group"
+            icon_color="blue darken-2"
+            metric="+4%"
+            metric_text="since last week"
+            title="Meet Adoption"/>
+
+        <ScoreCard
+            :percent="3"
+            googlelogo="Calendar"
+            help_btn
+            help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
+            help_btn_text="Learn how to use Focus Time"
+            help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
+            help_title="Focus Time"
+            icon="mdi-stove"
+            icon_color="blue darken-2"
+            metric="+5%"
+            metric_text="since last week"
+            title="Calendar Adoption"/>
+        <ScoreCard
+            :percent="17"
+            googlelogo="Docs"
+            help_text=''
+            help_title="Scoring"
+            icon="mdi-chat"
+            icon_color="blue darken-2"
+            metric="+5%"
+            metric_text="since last week"
+            title="Docs Adoption"
+        />
+        <ScoreCard
+            :percent="57"
+            googlelogo="Sheets"
+            help_text=''
+            help_title="Scoring"
+            icon="mdi-chat"
+            icon_color="blue darken-2"
+            metric="+5%"
+            metric_text="since last week"
+            title="Sheets Adoption"
+        />
+        <ScoreCard
+            :percent="37"
+            googlelogo="Chat"
+            help_text=''
+            help_title="Scoring"
+            icon="mdi-chat"
+            icon_color="blue darken-2"
+            metric="+5%"
+            metric_text="since last week"
+            title="Chat Adoption"
+        />
+      </v-row>
+
+      <v-row>
+
+        <v-col>
+          <h1 class="text-center grey--text">Time spend</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <ScoreCard
+            :percent="0"
+            help_btn
+            help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
+            help_btn_text="Learn how to use Focus Time"
+            help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
+            help_title="Focus Time"
+            icon="mdi-headphones"
+            icon_color="blue darken-2"
+            metric="Hours: 0"
+            metric_text="this Week"
+            title="Focus time"/>
+
+        <ScoreCard
+            :percent="0"
+            help_btn
             help_btn_scr="https://www.calendar.com/blog/perfect-amount-of-meetings-per-day-backed-by-science"
             help_btn_text="Read More"
             help_text='Excessive meetings can also result in information overload and a sense of failure.
@@ -89,33 +181,27 @@
             help_title="Meetings"
             icon="mdi-account-group"
             icon_color="blue darken-2"
-            metric="Hours: 4"
+            metric="Hours: 0"
             metric_text="this Week"
-            title="Google Meet Adoption"/>
-
+            title="Time in meetings"/>
+        <YoutubeCard
+            subtitle="Get Insights into your time" title="Time insights"
+            videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
 
       </v-row>
       <v-row>
-
-        <ScoreCard
-            help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
-                        Workspace.
-                        Your usage data of Google-Workspace is used to determine your score.
-                        The kind and amount of Interaction are added up.'
-            help_title="Scoring"
-            icon="mdi-calendar"
-            icon_color="yellow darken-2"
-            metric="+5%"
-            metric_text="since last week"
-            title="Calendar Adoption"
-        />
-        <AppsUsageCard neverUsedApps="['Drive', 'Chat', 'Gmail']"/>
-
-
+        <v-col cols="3">
+          <v-card class="" elevation="5" outlined>
+            <v-card-title class="grey--text">Hours on Workspace</v-card-title>
+            <!--            <v-card-subtitle class="grey&#45;&#45;text">Title</v-card-subtitle>-->
+            <v-divider></v-divider>
+            <Bar :chart-data="workingHoursData" :chartOptions="workingHoursChartOptions" class="px-4 mt-3"/>
+          </v-card>
+        </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <h1 class="text-center grey--text">Performence Indicator</h1>
+          <h1 class="text-center grey--text">Communication Indicator</h1>
         </v-col>
       </v-row>
       <v-row>
@@ -127,14 +213,7 @@
             <Bar :chart-data="messagesData" :chartOptions="messagesChartOptions" class="px-4 mt-3"/>
           </v-card>
         </v-col>
-        <v-col cols="3">
-          <v-card class="" elevation="5" outlined>
-            <v-card-title class="grey--text">Hours on Workspace</v-card-title>
-            <!--            <v-card-subtitle class="grey&#45;&#45;text">Title</v-card-subtitle>-->
-            <v-divider></v-divider>
-            <Bar :chart-data="workingHoursData" :chartOptions="workingHoursChartOptions" class="px-4 mt-3"/>
-          </v-card>
-        </v-col>
+
         <v-col cols="3">
           <v-card class="" elevation="5" outlined>
             <v-card-title class="grey--text">Meeting Efficiency</v-card-title>
@@ -145,14 +224,7 @@
         </v-col>
 
       </v-row>
-      <v-row>
-        <v-col>
-          <h1 class="text-center grey--text">Your recommendated Material</h1>
-        </v-col>
-      </v-row>
-      <v-row>
 
-      </v-row>
       <v-row>
         <v-col>
           <h1 class="text-center grey--text">Your recommendated Material</h1>
@@ -161,14 +233,14 @@
       <v-row>
 
         <YoutubeCard
-            subtitle="Get Insights into your time" title="How to use Focus Time"
-            videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+            subtitle="Block time" title="How to use Focus Time"
+            videoId="https://www.youtube.com/embed/CKIajJmgcFk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
         <YoutubeCard
-            subtitle="Get Insights into your time" title="How to use Focus Time"
-            videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+            subtitle="Get Insights into your time" title="How to: Share multiple files in Google Drive - YouTube"
+            videoId="https://www.youtube.com/embed/Nul6ZNHjeiM?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
         <YoutubeCard
-            subtitle="Get Insights into your time" title="How to use Focus Time"
-            videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+            subtitle="Get Insights into your time" title="How to: Open Google Calendar in Gmail"
+            videoId="https://www.youtube.com/embed/qZzE84Gn3Yk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
       </v-row>
 
 
@@ -179,6 +251,7 @@
               </v-col>
               <v-col>Chats {{ this.userStore.chatMessages }}</v-col>
             </v-row>-->
+
     </v-container>
   </v-app>
 </template>
@@ -187,17 +260,15 @@
 import {useCounterStore} from "@/store/counter";
 import {useLoggedInUserStore} from "@/store/user";
 import {Bar} from 'vue-chartjs/legacy'
-
 import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
 import ScoreCard from "@/components/base/ScoreCard";
 import YoutubeCard from "@/components/base/YoutubeCard";
-import AppsUsageCard from "@/components/base/AppsUsageCard";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
   name: "DashboardComponent",
-  components: {AppsUsageCard, YoutubeCard, ScoreCard, Bar},
+  components: {YoutubeCard, ScoreCard, Bar},
   setup() {
     const counterStore = useCounterStore();
     const userStore = useLoggedInUserStore();

@@ -44,20 +44,8 @@
     </v-navigation-drawer>
     <v-app-bar app color="transparent" flat>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <!--      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>-->
 
-      <!--      <v-toolbar-title>Google Workspace Dashboard</v-toolbar-title>-->
       <v-spacer></v-spacer>
-
-
-      <!--      <v-img v-if="this.$vuetify.theme.dark" class="mr-3" contain
-                   height="40"
-                   src="../assets/Google-Workspace-logos/Google-Workspace-wordmark-light-gray/Google_Workspace_256x34px_Grey400@4x.png"
-                   width="40"></v-img>
-            <v-img v-if="!this.$vuetify.theme.dark" class="" contain
-                   height="40"
-                   src="../assets/Google-Workspace-logos/Google-Workspace-wordmark-dark-gray/Google_Workspace_256x34px_Grey700@4x.png"
-                   width="40"></v-img>-->
 
       <div>
         <v-switch v-model="$vuetify.theme.dark" color="primary" hide-details @click="toggleDarkMode"></v-switch>
@@ -109,6 +97,7 @@
 <script>
 import {useLoggedInUserStore} from "@/store/user";
 import routes from "@/routes";
+import {googleApps, listLoginActivity, listActivity, listGmailActivity, getUserData} from "@/googleApiHelper";
 
 // Gis / Gapi
 let gapiInited;
@@ -144,40 +133,6 @@ function gapiLoad() {
   window.gapi.load('client', gapiInit)
 }
 
-async function listLoginActivity(userKey, applicationName, maxResults) {
-  let response;
-  try {
-    const request = {
-      'userKey': userKey,
-      'applicationName': applicationName,
-      'maxResults': maxResults,
-    };
-    response = await window.gapi.client.reports.activities.list(request);
-    console.log(response);
-    return response.result.items;
-  } catch (err) {
-    console.log(err);
-    //document.getElementById('content').innerText = err.message;
-    return;
-  }
-}
-
-async function listGmailActivity(userId, maxResults) {
-  let response;
-  try {
-    const request = {
-      'userId': userId,
-      'maxResults': maxResults,
-    };
-    response = await window.gapi.client.gmail.users.messages.list(request);
-    console.log(response.result.messages);
-    return response.result.messages;
-  } catch (err) {
-    console.log(err);
-    //document.getElementById('content').innerText = err.message;
-    return;
-  }
-}
 
 function showEvents() {
 
@@ -193,11 +148,14 @@ function showEvents() {
     setToken(window.gapi.client.getToken().access_token)
     this.login()
     const userData = getUserData(this.setUserData)
-    console.log("userData", userData.toString())
     this.login()
+    console.log(googleApps)
     this.setUserData(userData)
     chats = await listLoginActivity('all', 'chat', 10);
     console.log("chats", chats)
+    let activity = await listActivity('all', 'all', 100);
+
+    console.log("activity", activity)
     this.setChatMessages(chats)
 
     //await listGmailActivity('me', 10);
@@ -222,23 +180,6 @@ function showEvents() {
 
 }
 
-function getUserData(callback) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + localStorage.getItem('accessToken'));
-  const accessToken = localStorage.getItem('accessToken');
-  //console.log(accessToken);
-  xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-  xhr.onload = function () {
-    //console.log(typeof xhr.responseText);
-    let data = JSON.parse(xhr.responseText);
-    return callback(data);
-    //console.log("onload", JSON.parse(xhr.responseText));
-    // return JSON.parse(xhr.responseText);
-    //setData(JSON.parse(xhr.responseText))
-  };
-  xhr.send();
-  return xhr.responseText;
-}
 
 /*
 function revokeToken() {

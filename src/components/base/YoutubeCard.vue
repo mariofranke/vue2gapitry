@@ -4,7 +4,7 @@
     <v-card
         class=" "
         elevation="5"
-
+        max-height="350px"
     >
       <v-card-title class="grey--text">{{ title }}
 

@@ -1,6 +1,6 @@
 <template>
   <v-col cols="4">
-    <v-card class="" elevation="5" max-width="400" outlined>
+    <v-card class="" elevation="5" max-width="" outlined>
       <v-card-title class="grey--text">Never used</v-card-title>
       <v-card-subtitle class="grey&#45;&#45;text">Try out some Apps you never used</v-card-subtitle>
       <v-divider></v-divider>

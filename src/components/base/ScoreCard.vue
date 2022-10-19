@@ -7,10 +7,13 @@
         mr="0"
     >
       <v-card-title class="grey--text">
-        <v-icon
+        <img v-if="googlelogo" :src="require(`@/assets/Google-Workspace-logos/${app.name}/${app.img}`)"
+             alt="app.name " class="mr-2" height="30px" width="30px">
 
-            size="32"
-            v-bind:color="icon_color"
+        <v-icon v-if="!googlelogo"
+                class="mr-2"
+                size="32"
+                v-bind:color="icon_color"
         >
           {{ icon }}
         </v-icon>
@@ -18,10 +21,9 @@
       </v-card-title>
       <div class="v-sheet--offset ">
 
-        <!--        <PercentageCircle :percent="70" activeColor="white" size="large"/>
-                <Percircle :percent="70" size="large"/>-->
-        <percircle v-if="!reveal" :displayTextAtZero="true" progressBarColor="#1B75BC" size="big"
-                   v-bind:percent="percent"/>
+
+        <percircle v-if="!reveal" :displayTextAtZero="true" :progressBarColor=getProgressBarColor()
+                   size="big" v-bind:percent="percent"/>
 
 
       </div>
@@ -54,16 +56,20 @@
             class="transition-fast-in-fast-out v-card--reveal"
             style="height: 100%;"
         >
+          <v-card-title class="grey--text">
+
+
+            {{ help_title }}
+          </v-card-title>
           <v-card-text>
-            <p class="text-h4 text--primary">
-              {{ help_title }}
-            </p>
-            <p> {{
+
+            <v-card-text> {{
                 help_text
               }}
 
-            </p>
-            <v-btn v-if="help_btn" color="primary"
+            </v-card-text>
+
+            <v-btn v-if='!!help_btn' color="primary"
                    v-bind:href="help_btn_scr"
                    x-small>
               {{ help_btn_text }}
@@ -81,12 +87,14 @@
           </v-card-actions>
         </v-card>
       </v-expand-transition>
+
     </v-card>
   </v-col>
 </template>
 
 <script>
 import Percircle from "@/components/base/PercircleChart";
+import {logos} from "@/assets/Google-Workspace-logos/googleLogos";
 
 export default {
   name: "ScoreCard",
@@ -95,8 +103,24 @@ export default {
     Percircle
   },
   data: () => ({
-    reveal: false
+    reveal: false,
+    app: Object
   }),
+  mounted() {
+    this.app = logos.filter(logo => logo.name === this.googlelogo)[0]
+  },
+
+  methods: {
+    getProgressBarColor() {
+      if (this.percent < 25) {
+        return "red";
+      } else if (this.percent < 50) {
+        return "orange";
+      } else {
+        return "green";
+      }
+    }
+  },
   props: {
     icon: {
       type: String,
@@ -141,6 +165,14 @@ export default {
     percent: {
       type: Number,
       default: 50
+    },
+    progressBarColor: {
+      type: String,
+      default: "#0c52bd"
+    },
+    googlelogo: {
+      type: String,
+      default: ""
     }
   },
 }

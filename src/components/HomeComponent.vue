@@ -10,11 +10,10 @@
             <p class="grey--text animate__animated animate__backInUp">
               A dashboard for Google Workspace users.<br>
               Login to use all the features.<br>
-              All Data is stored and processed locally on your device.
             </p>
 
 
-            <row v-for="logo in this.logos" :key="logo.name" class="col" name="asd">
+            <row v-for="logo in this.logos" :key="logo.name" class="col">
               <img :src="require(`@/assets/Google-Workspace-logos/${logo.name}/${logo.img}`)"
                    :style="{'animation-delay':logo.id*100+2000+'ms'}"
                    class="animate__animated  animate__rollIn">
