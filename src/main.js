@@ -29,7 +29,10 @@ const firebaseConfig = {
 export default firebase.initializeApp(firebaseConfig);
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
-export { db };
+const auth = firebase.auth();
+// Your web app's Firebase configuration
+
+export { db, auth };
 
 //const app = initializeApp(firebaseConfig);
 const router = new VueRouter({

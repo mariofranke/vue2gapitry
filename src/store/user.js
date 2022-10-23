@@ -15,19 +15,28 @@ export const useLoggedInUserStore = defineStore({
       locale: "",
       hd: "dev.ektosym.com",
     }),
+    users: useStorage("users", [{}]),
     accessToken: useStorage("accessToken", null),
     isLoggedIn: useStorage("isLoggedIn", false),
     darkMode: useStorage("darkMode", true),
     emails: useStorage("emails", []),
     chatMessages: useStorage("chatMessages", []),
+    isAdmin: useStorage("isAdmin", false),
   }),
   getters: {
     getAccessToken: (state) => state.accessToken,
     getUser: (state) => state.userData.email,
+    getAdminStatus: (state) => state.isAdmin,
   },
   actions: {
     setUserData(userData) {
       this.userData = userData;
+    },
+    setAdminStatus(isAdmin) {
+      this.isAdmin = isAdmin;
+    },
+    setUsers(users) {
+      this.users = users;
     },
     setEmails(emails) {
       this.emails = emails;
