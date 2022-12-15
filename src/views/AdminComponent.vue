@@ -120,7 +120,6 @@
 </template>
 
 <script>
-import {useCounterStore} from "@/store/counter";
 import {useLoggedInUserStore} from "@/store/user";
 
 import ScoreCard from "@/components/base/ScoreCard";
@@ -142,11 +141,9 @@ export default {
     }
   },
   setup() {
-    const counterStore = useCounterStore();
     const userStore = useLoggedInUserStore();
     return {
       userStore,
-      counterStore,
     };
   },
   props: {

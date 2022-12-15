@@ -7,7 +7,7 @@
         mr="0"
     >
       <v-card-title class="grey--text">
-        <img v-if="googlelogo" :src="require(`@/assets/Google-Workspace-logos/${app.name}/${app.img}`)"
+        <img v-if="googlelogo" :src="appIcon.icon"
              alt="app.name " class="mr-2" height="30px" width="30px">
 
         <v-icon v-if="!googlelogo"
@@ -31,7 +31,7 @@
       <v-card-text class="pt-0 text-right">
 
         <div class="text-h6 font-weight-bold mb-2">
-          {{ metric }}
+          {{ metric + "%" }}
         </div>
         <div class="subheading font-weight-light grey--text">
           {{ metric_text }}
@@ -107,9 +107,17 @@ export default {
     app: Object
   }),
   mounted() {
-    this.app = logos.filter(logo => logo.name === this.googlelogo)[0]
   },
-
+  computed: {
+    appIcon() {
+      let tmp;
+      tmp = logos.filter(logo => logo.name === this.googlelogo)[0]
+      return {
+        icon: require(`@/assets/Google-Workspace-logos/${tmp.name}/${tmp.img}`)
+      }
+    }
+  },
+  //:src="require(`@/assets/Google-Workspace-logos/${app.name}/${app.img}`
   methods: {
     getProgressBarColor() {
       if (this.percent < 25) {

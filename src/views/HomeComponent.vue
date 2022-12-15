@@ -13,11 +13,8 @@
             </p>
 
 
-            <row v-for="logo in this.logos" :key="logo.name" class="col">
-              <img :src="require(`@/assets/Google-Workspace-logos/${logo.name}/${logo.img}`)"
-                   :style="{'animation-delay':logo.id*100+2000+'ms'}"
-                   class="animate__animated  animate__rollIn">
-
+            <row v-for="logo in this.logos" :key="logo.name" :name=logo.name class="col">
+              <Google_icon :id="logo.id" :img="logo.img" :name="logo.name"></Google_icon>
             </row>
 
 
@@ -31,12 +28,12 @@
 </template>
 <script>
 import {logos} from "@/assets/Google-Workspace-logos/googleLogos";
-
-import 'animate.css';
-
+import Google_icon from "@/components/base/Google_icon";
+import '../../node_modules/animate.css/animate.css';
 
 export default {
   name: "HomeComponent",
+  components: {Google_icon},
   methods: {},
   data: () => ({
     logos

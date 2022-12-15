@@ -20,13 +20,23 @@ export const useLoggedInUserStore = defineStore({
     isLoggedIn: useStorage("isLoggedIn", false),
     darkMode: useStorage("darkMode", true),
     emails: useStorage("emails", []),
+    calendarEntries: useStorage("calendarEntries", []),
     chatMessages: useStorage("chatMessages", []),
     isAdmin: useStorage("isAdmin", false),
+    adminActivityData: useStorage("adminActivityData", []),
+    calendarActivityData: useStorage("calendarActivityData", []),
+    driveActivityData: useStorage("driveActivityData", []),
+    gmailActivityData: useStorage("gmailActivityData", []),
+    mobileActivityData: useStorage("mobileActivityData", []),
+    loginActivityData: useStorage("loginActivityData", []),
+    meetActivityData: useStorage("meetActivityData", []),
+    chatActivityData: useStorage("chatActivityData", []),
   }),
   getters: {
     getAccessToken: (state) => state.accessToken,
     getUser: (state) => state.userData.email,
     getAdminStatus: (state) => state.isAdmin,
+    getEmails: (state) => state.emails,
   },
   actions: {
     setUserData(userData) {
@@ -40,6 +50,9 @@ export const useLoggedInUserStore = defineStore({
     },
     setEmails(emails) {
       this.emails = emails;
+    },
+    setCalendarEntries(calendarEntries) {
+      this.calendarEntries = calendarEntries;
     },
     setChatMessages(chatMessages) {
       this.chatMessages = chatMessages;
@@ -55,6 +68,30 @@ export const useLoggedInUserStore = defineStore({
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
+    },
+    setAdminActivityData(adminActivityData) {
+      this.adminActivityData = adminActivityData;
+    },
+    setCalendarActivityData(calendarActivityData) {
+      this.calendarActivityData = calendarActivityData;
+    },
+    setDriveActivityData(driveActivityData) {
+      this.driveActivityData = driveActivityData;
+    },
+    setGmailActivityData(gmailActivityData) {
+      this.gmailActivityData = gmailActivityData;
+    },
+    setMobileActivityData(mobileActivityData) {
+      this.mobileActivityData = mobileActivityData;
+    },
+    setLoginActivityData(loginActivityData) {
+      this.loginActivityData = loginActivityData;
+    },
+    setMeetActivityData(meetActivityData) {
+      this.meetActivityData = meetActivityData;
+    },
+    setChatActivityData(chatActivityData) {
+      this.chatActivityData = chatActivityData;
     },
   },
 });

@@ -1,49 +1,31 @@
 <template>
 
-  <v-col v-bind:cols="reveal ? 8 : 4">
+  <v-col v-if="reveal">
     <v-card
         class=" "
         elevation="5"
-        max-height="350px"
     >
-      <v-card-title class="grey--text">{{ title }}
+      <v-layout></v-layout>
+
+      <v-card-title class="grey--text">
+
+        {{ title }}
 
 
       </v-card-title>
-      <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
 
       <v-card-text class="pt-0 text-right">
         <iframe :src=videoId allowfullscreen frameborder="0"
                 marginheight="0"
                 marginwidth="0"
                 scrolling="no"
-                type="text/html" v-bind:height="reveal ? '400px' : '200px'"
+                type="text/html"
                 width="100%"></iframe>
 
 
       </v-card-text>
 
 
-      <v-card-actions>
-        <v-btn
-            color="blue accent-4"
-            href="https://calendar.google.com/calendar/u/1/r"
-            text
-
-        >
-          Open Calendar
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn
-            color="blue accent-4"
-            icon
-            @click="reveal = !reveal"
-        >
-          <v-icon>mdi-arrow-expand</v-icon>
-
-        </v-btn>
-
-      </v-card-actions>
     </v-card>
   </v-col>
 </template>
@@ -63,16 +45,23 @@ export default {
     videoId: {
       type: String,
       default: "videoId"
+    },
+    revealBreakpoint: {
+      type: Number,
+      default: 0
+    },
+    revealData: {
+      type: Number,
+      default: 30
     }
   },
-  data: () => ({
-    reveal: false
-  }),
-  methods: {
-    toggleReveal() {
-      this.reveal = !this.reveal
+  data: () => ({}),
+  computed: {
+    reveal() {
+      return this.revealData > this.revealBreakpoint;
     }
-  }
+  },
+  methods: {}
 }
 </script>
 

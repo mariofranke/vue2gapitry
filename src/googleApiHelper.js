@@ -3,6 +3,15 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 export const googleApps = [
+  "calendar",
+  "chat",
+  "drive",
+  "login",
+  "meet",
+  "mobile",
+  "keep",
+];
+export const googleAppsALL = [
   "access_transparency",
   "admin",
   "calendar",
@@ -26,36 +35,44 @@ export const googleApps = [
   "keep",
 ];
 
-export async function getDataForUser() {
+export async function getActivityDataForUsers() {
   const userKeys = await getAllUserKeys();
-  userKeys.filter((key) => key.includes("mario"));
+  userKeys.push("all");
+  //userKeys.filter((key) => key.includes("mario"));
   //console.log(userKeys);
-  let key = userKeys[1];
-  let userData = {};
-  let filteredGoogleApps = googleApps.slice(0, 4);
-  //for (const key of userKeys) {
-  for (const app of filteredGoogleApps) {
-    const data = await listActivity(key, app, 10);
-    if (typeof data === "undefined") {
-      userData[app] = [];
-    } else {
-      userData[app] = data;
+  //let key = userKeys[1];
+  let users = new Map();
+  //let filteredGoogleApps = googleApps.slice(0, 4);
+  for (const key of userKeys) {
+    let userData = {};
+    console.log("loading data for", key);
+    for (const app of googleApps) {
+      console.log("loading data for", app);
+      const data = await listActivity(key, app);
+      if (typeof data === "undefined") {
+        userData[app] = [];
+      } else {
+        userData[app] = data;
+        await createUser(key, data, app);
+      }
     }
+    users.set(key, userData);
+    //await createUser(key, userData);
   }
-  console.log(userData);
+  console.log(users);
   //await createUser("test", userData);
-  return userData;
-  //}
+  return users;
 }
 
-export async function createUser(user, data) {
+export async function createUser(userKey, data, app) {
   firebase
     .firestore()
-    .collection("Users")
-    .add({
-      name: user,
+    .collection(userKey)
+    .doc(app)
+    .set({
+      name: userKey,
       data: data,
-      description: "User Data",
+      description: "ActivityData",
     })
     .then(() => {
       console.log("user created");
@@ -73,13 +90,12 @@ export async function getAllUserKeys() {
   return userKeys;
 }
 
-export async function listActivity(userKey, applicationName, maxResults) {
+export async function listActivity(userKey, applicationName) {
   let response;
   try {
     const request = {
       userKey: userKey,
       applicationName: applicationName,
-      maxResults: maxResults,
     };
     response = await window.gapi.client.reports?.activities?.list(request);
     return response.result.items;
@@ -89,12 +105,11 @@ export async function listActivity(userKey, applicationName, maxResults) {
   }
 }
 
-export async function listGmailActivity(userId, maxResults) {
+export async function listGmailActivity(userId) {
   let response;
   try {
     const request = {
       userId: userId,
-      maxResults: maxResults,
     };
     response = await window.gapi.client.gmail.users.messages.list(request);
     return response.result.messages;
@@ -102,6 +117,70 @@ export async function listGmailActivity(userId, maxResults) {
     console.log(err);
     //document.getElementById('content').innerText = err.message;
   }
+}
+
+export async function listCalendarEntriesforCalender(calendarId) {
+  let response;
+  try {
+    const request = {
+      calendarId: calendarId,
+    };
+    response = await window.gapi.client.calendar.events.list(request);
+    console.log("listCalendarEntriesforCalender", response);
+    return response.result.items;
+  } catch (err) {
+    console.error("Error: " + err);
+  }
+}
+
+export async function getAllCalenderEntries() {
+  const calendars = await listCalenders();
+  let filteredCalendars = calendars.filter((c) => c.accessRole === "owner");
+  let calendarEntries = [];
+  for (const calendar of filteredCalendars) {
+    const entries = await listCalendarEntriesforCalender(calendar.id);
+    for (const entry of entries) {
+      if (entry.start.dateTime !== undefined) {
+        calendarEntries.push(entry);
+      }
+    }
+    return calendarEntries;
+  }
+}
+
+export async function listCalenders() {
+  let response;
+  try {
+    response = await window.gapi.client.calendar.calendarList.list();
+    return response.result.items;
+  } catch (err) {
+    console.log(err);
+    //document.getElementById('content').innerText = err.message;
+  }
+}
+
+export async function getMessageforId(userId, messageId) {
+  let response;
+  try {
+    const request = {
+      userId: userId,
+      id: messageId,
+    };
+    response = await window.gapi.client.gmail.users.messages.get(request);
+    return response;
+  } catch (err) {
+    console.log(err);
+    //document.getElementById('content').innerText = err.message;
+  }
+}
+
+export async function getMessagesforId(userId, mails) {
+  let messages = [];
+  for (const mail of mails) {
+    let message = await getMessageforId(userId, mail.id);
+    messages.push(message);
+  }
+  return messages;
 }
 
 export function getUserData(callback) {
@@ -112,7 +191,7 @@ export function getUserData(callback) {
       localStorage.getItem("accessToken")
   );
   const accessToken = localStorage.getItem("accessToken");
-  console.log(accessToken);
+  //console.log(accessToken);
   xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
   xhr.onload = function () {
     //console.log(typeof xhr.responseText);
@@ -154,7 +233,7 @@ export async function getUserAdminStatus(userKey) {
       userKey: userKey,
     };
     response = await window.gapi.client.directory.users.get(request);
-    console.log(response);
+    //console.log(response);
     return response.result.isAdmin;
   } catch (err) {
     console.error("Error: " + err);

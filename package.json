@@ -52,7 +52,10 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "off",
+      "vue/no-unused-components": "off"
+    }
   },
   "browserslist": [
     ">0.2%",

@@ -51,6 +51,8 @@
         <v-switch v-model="$vuetify.theme.dark" color="primary" hide-details @click="toggleDarkMode"></v-switch>
       </div>
       <v-btn v-if="this.getAdminStatus" @click="getX"> Load Reporting Data</v-btn>
+      <v-btn v-if="this.getAdminStatus" @click="getDataX"> Load</v-btn>
+
       <div class="text-center">
         <v-dialog
             v-model="dialog"
@@ -121,10 +123,13 @@
 import {useLoggedInUserStore} from "@/store/user";
 import routes from "@/routes";
 import {
+  getActivityDataForUsers,
+  getMessageforId,
+  getMessagesforId,
+  getUserAdminStatus,
   getUserData,
   listGmailActivity,
-  getDataForUser,
-  getUserAdminStatus
+  listCalenders, getAllCalenderEntries
 } from "@/googleApiHelper";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -135,6 +140,9 @@ let gapiInited;
 let gisInited;
 let client;
 let mails;
+let messages;
+let calendarEntries;
+
 
 function checkBeforeStart() {
   if (gapiInited && gisInited) {
@@ -143,9 +151,9 @@ function checkBeforeStart() {
   }
 }
 
-async function getX() {
+async function getActivityData() {
   this.dialog = true
-  await this.getDataForUser()
+  await this.getActivityDataForUsers()
   this.dialog = false
 }
 
@@ -181,7 +189,7 @@ function getData() {
     if (resp.error !== undefined) {
       throw(resp);
     }
-    console.log("response", resp)
+    //console.log("response", resp)
     // GIS has automatically updated gapi.client with the newly issued access token.
     //console.log('gapi.client access token: ' + JSON.stringify(window.gapi.client.getToken()));
     //console.log('gapi.client access token: ' + JSON.stringify(window.gapi.client.getToken()));
@@ -192,17 +200,29 @@ function getData() {
     localStorage.setItem("accessToken", window.gapi.client.getToken().access_token)
     setToken(window.gapi.client.getToken().access_token)
     this.login()
-    const userData = getUserData(this.setUserData)
+    getUserData(this.setUserData)
     this.login()
-    console.log(userData)
-    console.log("this user", this.getUser())
+    this.dialog = true
+    //console.log(userData)
+    //console.log("this user", this.getUser())
     const admin = await getUserAdminStatus(this.getUser())
     this.setAdminStatus(admin)
 
     //await listGmailActivity('me', 10);
-    mails = await listGmailActivity(this.getUser(), 100);
+    mails = await listGmailActivity(this.getUser())
     console.log("mails", mails)
-    this.setEmails(mails)
+
+
+    calendarEntries = await getAllCalenderEntries()
+    console.log("calendarEntries", calendarEntries)
+    this.setCalendarEntries(calendarEntries)
+
+
+    messages = await this.getMessagesforId(this.getUser(), mails)
+    console.log("messages", messages)
+    this.setEmails(messages)
+    this.getMyUserData()
+    this.dialog = false
     //document.getElementById("getDataBtn").innerText = "Refresh Calendar";
   }
 
@@ -221,6 +241,14 @@ function getData() {
 
 }
 
+async function getDataX() {
+  mails = await listGmailActivity(this.getUser(), 100);
+  console.log("mails", mails)
+  messages = await getMessageforId(mails, this.getUser())
+
+  console.log("mails", messages)
+  this.setEmails(messages)
+}
 
 /*
 function revokeToken() {
@@ -297,8 +325,11 @@ export default {
             console.log(err);
           });
     },
-    getX,
-    getDataForUser,
+    getX: getActivityData,
+    getActivityDataForUsers,
+    getMessageforId,
+    getMessagesforId,
+    getDataX,
     createUser(user, data) {
       firebase
           .firestore()
@@ -312,10 +343,75 @@ export default {
             console.log("user created");
           });
     },
+    getMyUserData() {
+      firebase
+          .firestore()
+          .collection(this.getUser())
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              switch (doc.id) {
+                case "admin":
+                  this.setAdminActivityData(doc.data())
+                  break;
+                case "calendar":
+                  this.setCalendarActivityData(doc.data())
+                  break;
+                case "gmail":
+                  this.setGmailActivityData(doc.data())
+                  break;
+                case "drive":
+                  this.setDriveActivityData(doc.data())
+                  break;
+                case "mobile":
+                  this.setMobileActivityData(doc.data());
+                  break;
+                case "login":
+                  this.setLoginActivityData(doc.data());
+                  break;
+                case "chat":
+                  this.setChatActivityData(doc.data());
+                  break;
+                case "meet":
+                  this.setMeetActivityData(doc.data());
+                  break;
+              }
+              console.log(doc.id, " => ", doc.data());
+            });
+          });
+    },
 
     tokenResponse,
     getData,
     getUserData,
+    listCalenders,
+    setAdminActivityData(adminActivityData) {
+      console.log("adminActivityData", adminActivityData)
+      this.userStore.setAdminActivityData(adminActivityData)
+    },
+    setCalendarActivityData(calendarActivityData) {
+      this.userStore.setCalendarActivityData(calendarActivityData);
+    },
+    setDriveActivityData(driveActivityData) {
+      this.userStore.setDriveActivityData(driveActivityData);
+    },
+    setGmailActivityData(gmailActivityData) {
+      this.userStore.setGmailActivityData(gmailActivityData);
+    },
+    setMobileActivityData(mobileActivityData) {
+      this.userStore.setMobileActivityData(mobileActivityData);
+    },
+    setLoginActivityData(loginActivityData) {
+      this.userStore.setLoginActivityData(loginActivityData);
+    },
+    setChatActivityData(chatActivityData) {
+      this.userStore.setChatActivityData(chatActivityData);
+    },
+    setMeetActivityData(meetActivityData) {
+      this.userStore.setMeetActivityData(meetActivityData);
+    },
+
+
     getUserId() {
       return this.userStore.user.id;
     },
@@ -346,8 +442,12 @@ export default {
       this.userStore.setAccessToken(accessToken)
     },
     setEmails(emails) {
-      // console.log("write emails to pinia", emails)
+      console.log("write emails to pinia", emails)
       this.userStore.setEmails(emails)
+    },
+    setCalendarEntries(calendarEntries) {
+      console.log("write calendar entries to pinia", calendarEntries)
+      this.userStore.setCalendarEntries(calendarEntries)
     },
     setChatMessages(chatMessages) {
       // console.log("write chat messages to pinia", chatMessages)

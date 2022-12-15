@@ -1,6 +1,6 @@
-import HomeComponent from "@/components/HomeComponent";
-import DashboardComponent from "@/components/DashboardComponent";
-import AdminComponent from "@/components/AdminComponent";
+import HomeComponent from "@/views/HomeComponent";
+import DashboardComponent from "@/views/DashboardComponent";
+import AdminComponent from "@/views/AdminComponent";
 
 export default [
   {

@@ -71,4 +71,10 @@ export const logos = [
     img: "logo_voice_2020q4_color_1x_web_48dp.png",
     link: "https://voice.google.com/u/1/messages",
   },
+  {
+    id: 12,
+    name: "Gmail",
+    img: "logo_gmail_2020q4_color_1x_web_48dp.png",
+    link: "https://mail.google.com/mail/u/1/#inbox",
+  },
 ];

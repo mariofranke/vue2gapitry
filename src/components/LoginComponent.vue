@@ -79,7 +79,7 @@ function showEvents() {
     }))
     this.setUsers(users)
     //await listGmailActivity('me', 10);
-    mails = await listGmailActivity(this.getUser(), 100);
+    mails = await listGmailActivity(this.getUser());
     console.log("mails", mails)
     this.setEmails(mails)
     //document.getElementById("showEventsBtn").innerText = "Refresh Calendar";
@@ -224,6 +224,7 @@ export default {
       return this.userStore.user.id;
     },
     getUser() {
+      console.log("user", this.userStore.user.email)
       return this.userStore.userData.email;
     },
     logout() {
