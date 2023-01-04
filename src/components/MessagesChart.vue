@@ -22,7 +22,11 @@ export default {
     };
   },
   props: {
-    messagesData: Object,
+    messagesData: {
+      type: Object,
+      required: true,
+    },
+
   },
   data: () => ({
     messagesChartOptions: {

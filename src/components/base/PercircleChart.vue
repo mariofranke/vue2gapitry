@@ -171,7 +171,7 @@ export default {
     },
 
     textColor() {
-      return this.hovering ? this.progressBarColor : "";
+      return this.progressBarColor
     },
   },
 

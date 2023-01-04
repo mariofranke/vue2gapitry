@@ -18,7 +18,11 @@ export default {
   name: "BarChart",
   components: {Bar},
   props: {
-    data: Object,
+    data: {
+      type: Object,
+      default: () => {
+      }
+    },
     options: Object,
     title: String
   },

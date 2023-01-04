@@ -31,7 +31,7 @@
       <v-card-text class="pt-0 text-right">
 
         <div class="text-h6 font-weight-bold mb-2">
-          {{ metric + "%" }}
+          {{ metric.toFixed(1).toString() + "%" }}
         </div>
         <div class="subheading font-weight-light grey--text">
           {{ metric_text }}
@@ -135,8 +135,8 @@ export default {
       default: "mdi-chart-line"
     },
     metric: {
-      type: String,
-      default: "Score"
+      type: Number,
+      default: 0
     },
     metric_text: {
       type: String,

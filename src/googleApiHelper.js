@@ -96,11 +96,13 @@ export async function listActivity(userKey, applicationName) {
     const request = {
       userKey: userKey,
       applicationName: applicationName,
+      maxResults: 400,
     };
     response = await window.gapi.client.reports?.activities?.list(request);
     return response.result.items;
   } catch (err) {
     //document.getElementById('content').innerText = err.message;
+    console.log("Error: " + err);
     return;
   }
 }
@@ -206,14 +208,14 @@ export function getUserData(callback) {
 }
 
 /**
- * Print the first 10 users in the domain.
+ * Print the first 20 users in the domain.
  */
 async function listUsers() {
   let response;
   try {
     const request = {
       domain: "dev.ektosym.com",
-      maxResults: 10,
+      maxResults: 20,
       orderBy: "email",
     };
     response = await window.gapi.client.directory.users.list(request);

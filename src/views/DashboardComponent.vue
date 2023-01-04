@@ -10,8 +10,9 @@
       <v-row>
 
         <ScoreCard
-            :metric="workspaceExperienceScoreIncrease.toFixed(0).toString()"
+            :metric="workspaceExperienceScoreIncrease"
             :percent="workspaceExperienceScore"
+            dark-mode="true"
             help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
                               Workspace and its tools.
                               Your usage data of Google-Workspace is used to determine your score.
@@ -19,11 +20,11 @@
             help_title="Scoring"
             icon="mdi-star-circle"
             icon_color="yellow darken-2"
-            metric_text="since last week"
-            title="Workspace Experience Score"
+            metric_text="increase since last week"
+            title="Workspace Adaption Score"
         />
         <ScoreCard
-            :metric="collaborationScoreIncrease.toFixed(0).toString()"
+            :metric="collaborationScoreIncrease"
             :percent="collaborationScore"
             help_text='The Score shows your usage of Collaboration inside Google Workspace. The higher the score,
                               the more you use the collaboration tools inside Google
@@ -33,20 +34,17 @@
             help_title="Scoring"
             icon="mdi-account-group"
             icon_color="yellow darken-2"
-            metric_text="since last week"
+            metric_text="increase since last week"
             title="Collaboration Score"
         />
         <ScoreCard
-            :metric="mobilityScoreIncrease.toFixed(0).toString()"
+            :metric="mobilityScoreIncrease"
             :percent="mobilityScore"
-            help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
-                              Workspace and its tools.
-                              Your usage data of Google-Workspace is used to determine your score.
-                              The kind and amount of Interaction are added up.'
+            help_text='The Score shows your usage of Google Workspace. The Score is based of the amount of Devices you use and if you use an mobile device.'
             help_title="Scoring"
             icon="mdi-cellphone-link"
             icon_color="yellow darken-2"
-            metric_text="since last week"
+            metric_text="increase since last week"
             title="Mobility Score"
         />
       </v-row>
@@ -63,98 +61,98 @@
       <v-row>
 
         <ScoreCard
-            :metric="gmailAdoptionIncrease.toFixed(0).toString()"
+            :metric="gmailAdoptionIncrease"
             :percent="gmailAdoption"
             googlelogo="Gmail"
             help_btn
-            help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
-            help_btn_text="Learn how to use Focus Time"
-            help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
+            help_btn_scr="https://mail.google.com/mail/u/0/"
+            help_btn_text="Use Gmail"
+            help_text='The Score is determined by your usage of Gmail. The higher the score, the more you use Gmail.
+                              Your usage data of Gmail is used to determine your score.
+                              The kind and amount of Interaction are added up.'
             help_title="Scoring"
             icon="mdi-stove"
             icon_color="blue darken-2"
-            metric_text="since last week"
+            metric_text="increase since last week"
             title="Gmail Adoption"/>
 
 
         <ScoreCard
-            :metric="driveAdoptionIncrease.toFixed(0).toString()"
+            :metric="driveAdoptionIncrease"
             :percent="driveAdoption"
             googlelogo="Drive"
             help_btn
-            help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
-            help_btn_text="Learn how to use Focus Time"
-            help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
-            help_title="Focus Time"
+            help_btn_scr="https://drive.google.com/drive/u/0/my-drive"
+            help_btn_text="Use Google Drive"
+            help_text='The Score is determined by your usage of Google Drive. The higher the score, the more you use Google
+                              Drive.
+                              Your usage data of Google Drive is used to determine your score.
+                              The kind and amount of Interaction are added up.'
+            help_title="Scoring"
             icon="mdi-stove"
             icon_color="blue darken-2"
-            metric_text="since last week"
+            metric_text="increase since last week"
             title="Drive Adoption"/>
 
         <ScoreCard
-            :metric="meetAdoptionIncrease.toFixed(0).toString()"
+            :metric="meetAdoptionIncrease"
             :percent="meetAdoption"
             googlelogo="Meet"
             help_btn
-            help_btn_scr="https://www.calendar.com/blog/perfect-amount-of-meetings-per-day-backed-by-science"
-            help_btn_text="Read More"
-            help_text=''
+            help_btn_scr="https://meet.google.com/"
+            help_btn_text="Use Google Meet"
+            help_text='The Score is determined by your usage of Google Meet. The higher the score, the more you use Google
+                              Meet.
+                              Your usage data of Google Meet is used to determine your score.
+                              The kind and amount of Interaction are added up.'
             help_title=""
             icon="mdi-account-group"
             icon_color="blue darken-2"
-            metric_text="since last week"
+            metric_text="increase since last week"
             title="Meet Adoption"/>
 
         <ScoreCard
-            :metric="calendarAdoptionIncrease.toFixed(0).toString()"
+            :metric="calendarAdoptionIncrease"
             :percent="calendarAdoption"
             googlelogo="Calendar"
             help_btn
-            help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
-            help_btn_text="Learn how to use Focus Time"
-            help_text='To reduce distractions while you work, you can schedule a focus time event in Google Calendar.'
-            help_title="Focus Time"
+            help_btn_scr="https://calendar.google.com/calendar/u/0/r"
+            help_btn_text="Use Google Calendar"
+            help_text='The Score is determined by your usage of Google Calendar. The higher the score, the more you use Google
+                              Calendar.
+                              Your usage data of Google Calendar is used to determine your score.
+                              The kind and amount of Interaction are added up.'
+            help_title="Scoring"
             icon="mdi-stove"
             icon_color="blue darken-2"
-            metric_text="since last week"
+            metric_text="increase since last week"
             title="Calendar Adoption"/>
-        <!--        <ScoreCard
-                    :percent="17"
-                    googlelogo="Docs"
-                    help_text=''
-                    help_title="Scoring"
-                    icon="mdi-chat"
-                    icon_color="blue darken-2"
-                    metric="+5%"
-                    metric_text="since last week"
-                    title="Docs Adoption"
-                />
-                <ScoreCard
-                    :percent="57"
-                    googlelogo="Sheets"
-                    help_text=''
-                    help_title="Scoring"
-                    icon="mdi-chat"
-                    icon_color="blue darken-2"
-                    metric="+5%"
-                    metric_text="since last week"
-                    title="Sheets Adoption"
-                />-->
         <ScoreCard
-            :metric="chatAdoptionIncrease.toFixed(0).toString()"
+            :metric="chatAdoptionIncrease"
             :percent="chatAdoption"
             googlelogo="Chat"
-            help_text=''
+            help_btn
+            help_btn_scr="https://chat.google.com/"
+            help_btn_text="Use Google Chat"
+            help_text='The Score is determined by your usage of Google Chat. The higher the score, the more you use Google
+                              Chat.
+                              Your usage data of Google Chat is used to determine your score.
+                              The kind and amount of Interaction are added up.'
             help_title="Scoring"
             icon="mdi-chat"
             icon_color="blue darken-2"
-            metric_text="increase since last week"
+            metric_text="increase increase since last week"
             title="Chat Adoption"
         />
       </v-row>
       <v-row>
+        <v-col>
+          <h1 class="text-center ">Time based usage indicators</h1>
+        </v-col>
+      </v-row>
+      <v-row>
         <ScoreCard
-            :metric=focusTime.toString()
+            :metric=focusTime
             :percent="getFocusTimePercentage()"
             help_btn
             help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
@@ -167,8 +165,8 @@
             title="Focus time"/>
 
         <ScoreCard
-            :metric=timeInMeetings.toString()
-            :percent=getTimeinMeetingsPercentage()
+            :metric=timeInMeetings
+            :percent="getTimeinMeetingsPercentage()"
             help_btn
             help_btn_scr="https://www.calendar.com/blog/perfect-amount-of-meetings-per-day-backed-by-science"
             help_btn_text="Read More"
@@ -183,24 +181,29 @@
             title="Time in meetings"/>
 
       </v-row>
+
+      <v-row>
+        <v-col>
+          <h1 class="text-center ">Communication indicators</h1>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="3">
           <MessagesChart :messages-data="getMessagesData()"></MessagesChart>
         </v-col>
 
-
       </v-row>
       <v-row>
         <v-col cols="4">
-          <DoughnutChart :data="meetingAppDataThisWeek" title="Communication Efficiency"></DoughnutChart>
+          <DoughnutChart :data="meetingAppDataThisWeek" title="Meeting tools this week"></DoughnutChart>
 
         </v-col>
         <v-col cols="4">
-          <DoughnutChart :data="meetingAppDataLastWeek" title="Communication Efficiency"></DoughnutChart>
+          <DoughnutChart :data="meetingAppDataLastWeek" title="Meeting tools  last week"></DoughnutChart>
 
         </v-col>
         <v-col cols="4">
-          <DoughnutChart :data="meetingAppDataLastLastWeek" title="Communication Efficiency"></DoughnutChart>
+          <DoughnutChart :data="meetingAppDataLastLastWeek" title="Communication tools 2 weeks ago"></DoughnutChart>
 
         </v-col>
       </v-row>
@@ -219,32 +222,32 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-row>
-                <YoutubeCard
-                    videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+                <YoutubeCard v-if="calendarAdoption < 20" title="How to view time insights in Google Calendar"
+                             videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
                 <YoutubeCard v-if="focusTime < 1"
                              title="How to Schedule a Focus Time Event in Google Calendar"
-                             videoId="https://www.youtube.com/emb  ed/CKIajJmgcFk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
-                <YoutubeCard
-                    title="How to: Share multiple files in Google Drive - YouTube"
-                    videoId="https://www.youtube.com/embed/Nul6ZNHjeiM?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
-                <YoutubeCard
-                    title="How to: Open Google Calendar in Gmail"
-                    videoId="https://www.youtube.com/embed/qZzE84Gn3Yk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+                             videoId="https://www.youtube.com/embed/CKIajJmgcFk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+                <YoutubeCard v-if="driveAdoption < 20"
+                             title="How to: Share multiple files in Google Drive - YouTube"
+                             videoId="https://www.youtube.com/embed/Nul6ZNHjeiM?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+                <YoutubeCard v-if="calendarAdoption < 20 || gmailAdoption < 20"
+                             title="How to: Open Google Calendar in Gmail"
+                             videoId="https://www.youtube.com/embed/qZzE84Gn3Yk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
               </v-row>
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel
           >
             <v-expansion-panel-header>
-              <h1>Recommendation not needed for your expertise level</h1>
+              <h1>All Learn Resources</h1>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-row>
+                <YoutubeCard title="How to view time insights in Google Calendar"
+                             videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
                 <YoutubeCard
-                    videoId="https://www.youtube.com/embed/UlS9Ll1UNmY?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
-                <YoutubeCard v-if="focusTime > 1"
-                             title="How to Schedule a Focus Time Event in Google Calendar"
-                             videoId="https://www.youtube.com/emb  ed/CKIajJmgcFk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
+                    title="How to Schedule a Focus Time Event in Google Calendar"
+                    videoId="https://www.youtube.com/embed/CKIajJmgcFk?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
                 <YoutubeCard
                     title="How to: Share multiple files in Google Drive - YouTube"
                     videoId="https://www.youtube.com/embed/Nul6ZNHjeiM?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"/>
@@ -280,9 +283,10 @@ import {data} from "@/components/base/chartConfig";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale,)
 
+
 let emails = []
 let emailDates = []
-let chatDates = []
+let chatActivityData = []
 let messagesData = []
 let calendarEntries = []
 
@@ -309,7 +313,7 @@ export default {
   mounted() {
     emails = this.getEmailsData()
 
-    chatDates = this.getChatsData()
+    chatActivityData = this.getChatsData()
     emailDates = this.getEmailsData().reduce((acc, cur) => {
       acc.push(cur.date)
       return acc
@@ -332,16 +336,14 @@ export default {
 
     // Calendar Adoption
     let calendarEntriesUntilLastWeek = this.filterDataOlderThenDateTime(calendarEntries, lastWeek)
-    this.calendarAdoption = this.countItems(calendarEntries)
-    this.calendarAdoptionLastWeek = this.countItems(calendarEntriesUntilLastWeek)
+
     // console.log("calendarAdoptionLastWeek", this.calendarAdoptionLastWeek)
     // console.log("calendarAdoption", this.calendarAdoption)
-    this.calendarAdoptionIncrease = this.calculateIncreaseInPercent(this.calendarAdoptionLastWeek, this.calendarAdoption)
     // console.log("calendarAdoptionIncrease", this.calendarAdoptionIncrease)
 
     // Meet Adoption
     let meetData = this.getMeetData()
-    let meetDataLastWeek = this.filterDataOlderThen(meetData, lastWeek)
+    let meetDataLastWeek = this.filterDataOlderThen(meetData, thisWeek)
     // console.log("meetDataLastWeek", meetDataLastWeek)
     // console.log("meetData", meetData)
     this.meetAdoption = this.countItems(meetData)
@@ -356,7 +358,7 @@ export default {
     // console.log("driveData", driveData)
     let driveDataLastWeek = this.filterDataOlderThen(driveData, lastWeek)
     // console.log("driveDataLastWeek", driveDataLastWeek)
-    this.driveAdoption = this.countItems(driveData)
+    this.driveAdoption = this.countItems(driveData) / 10
     this.driveAdoptionLastWeek = this.countItems(driveDataLastWeek)
     this.driveAdoptionIncrease = this.calculateIncreaseInPercent(this.driveAdoptionLastWeek, this.driveAdoption)
     // console.log("driveAdoption", this.driveAdoption)
@@ -368,8 +370,8 @@ export default {
     let mobileActivityDataLastWeek = this.filterDataOlderThen(mobileActivityData, lastWeek)
     console.log("mobileActivityData", mobileActivityData)
     console.log("mobileActivityDataLastWeek", mobileActivityDataLastWeek)
-    this.mobilityScore = this.countItems(mobileActivityData)
-    this.mobileScoreLastWeek = this.countItems(mobileActivityDataLastWeek)
+    this.mobilityScore = this.calculateMobilityActivityScore(mobileActivityData)
+    this.mobileScoreLastWeek = this.calculateMobilityActivityScore(mobileActivityDataLastWeek)
     this.mobilityScoreIncrease = this.calculateIncreaseInPercent(this.mobileScoreLastWeek, this.mobilityScore)
     console.log("mobileScore", this.mobilityScore)
     console.log("mobileScoreLastWeek", this.mobileScoreLastWeek)
@@ -382,13 +384,13 @@ export default {
     console.log("EmailsThisWeek", emails)
     // console.log("EmailsLastWeek", EmailsLastWeek)
     // console.log("EmailsLastLastWeek", EmailsLastLastWeek)
-    let chatsThisWeek = this.filterChatsByWeek(chatDates, thisWeek)
-    let chatsOlderThenThisWeek = this.filterDataOlderThen(chatDates, thisWeek)
-    let chatsOlderThenLastWeek = this.filterDataOlderThen(chatDates, lastWeek)
+    let chatsThisWeek = this.filterChatsByWeek(chatActivityData, thisWeek)
+    let chatsOlderThenThisWeek = this.filterDataOlderThen(chatActivityData, thisWeek)
+    let chatsOlderThenLastWeek = this.filterDataOlderThen(chatActivityData, lastWeek)
     // console.log("chatsThisWeek", chatsThisWeek)
     // console.log("chatsOlderThenThisWeek", chatsOlderThenThisWeek)
-    let chatsLastWeek = this.filterChatsByWeek(chatDates, lastWeek)
-    let chatsLastLastWeek = this.filterChatsByWeek(chatDates, lastLastWeek)
+    let chatsLastWeek = this.filterChatsByWeek(chatActivityData, lastWeek)
+    let chatsLastLastWeek = this.filterChatsByWeek(chatActivityData, lastLastWeek)
     this.chatAdoption = this.calculateChatAdoptionScore(chatsThisWeek, chatsOlderThenThisWeek)
     let chatAdoptionLastWeek = this.calculateChatAdoptionScore(chatsLastWeek, chatsOlderThenLastWeek)
     // console.log("chatAdoption", this.chatAdoption)
@@ -405,6 +407,23 @@ export default {
     this.gmailAdoptionIncrease = this.calculateIncreaseInPercent(gmailAdoptionLastWeek, this.gmailAdoption)
     console.log("emailAdoptionIncrease", this.gmailAdoptionIncrease)
 
+    // Collaboration
+
+    console.log("chatActivityData", chatActivityData)
+    let meetingsPerApp = this.getMeetingsWithApp(calendarEntries)
+    this.collaborationScore = this.calculateCollaborationScore(chatActivityData, emails, meetingsPerApp)
+
+    // Calendar Adoption
+    let calendarActivityData = this.getCalendarActivityData()
+    let calendarActivityDataUntilLastWeek = this.filterDataOlderThen(calendarActivityData, lastWeek)
+    this.calendarAdoption = this.countItems(calendarActivityData)
+    this.calendarAdoptionLastWeek = this.countItems(calendarActivityDataUntilLastWeek)
+    console.log("calendarActivityData", calendarActivityData)
+    console.log("calendarActivityDataUntilLastWeek", calendarActivityDataUntilLastWeek)
+    console.log("calendarAdoption", this.calendarAdoption)
+    console.log("calendarAdoptionLastWeek", this.calendarAdoptionLastWeek)
+    this.calendarAdoptionIncrease = this.calculateIncreaseInPercent(this.calendarAdoptionLastWeek, this.calendarAdoption)
+    console.log("calendarAdoptionIncrease", this.calendarAdoptionIncrease)
 
     messagesData = {
       labels: [startLastLastWeek, startLastWeek, start],
@@ -444,7 +463,8 @@ export default {
       datasets: [
         {
           backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-          data: [meetingsPerAppThisWeek.zoom.length, meetingsPerAppThisWeek.teams.length, meetingsPerAppThisWeek.hangout.length, meetingsPerAppThisWeek.call.length]
+          // data: [meetingsPerAppThisWeek.zoom.length, meetingsPerAppThisWeek.teams.length, meetingsPerAppThisWeek.hangout.length, meetingsPerAppThisWeek.call.length]
+          data: [1, 3, 4, 5]
         }
       ]
     }
@@ -453,7 +473,9 @@ export default {
       datasets: [
         {
           backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-          data: [meetingsPerAppLastWeek.zoom.length, meetingsPerAppLastWeek.teams.length, meetingsPerAppLastWeek.hangout.length, meetingsPerAppLastWeek.call.length]
+          // data: [meetingsPerAppLastWeek.zoom.length, meetingsPerAppLastWeek.teams.length, meetingsPerAppLastWeek.hangout.length, meetingsPerAppLastWeek.call.length]
+          data: [1, 0, 0, 5]
+
         }
       ]
     }
@@ -472,7 +494,7 @@ export default {
     console.log("workspaceExperienceScore", this.workspaceExperienceScore)
     console.log("workspaceExperienceScoreLastWeek", this.workspaceExperienceScoreLastWeek)
     console.log("workspaceExperienceScoreIncrease", this.workspaceExperienceScoreIncrease)
-    
+
     // console.log("meetingsPerAppThisWeek", meetingsPerAppThisWeek)
     // console.log("meetingsPerAppLastWeek", meetingsPerAppLastWeek)
     // console.log("meetingsPerAppLastLastWeek", meetingsPerAppLastLastWeek)
@@ -495,8 +517,8 @@ export default {
         return 0
       } else if (increase.isNaN) {
         return 0
-      } else if (chatAdoptionLastWeek == 0) {
-        return 100
+      } else if (chatAdoption === 0 && chatAdoptionLastWeek === 0) {
+        return 0
       } else {
         return increase
       }
@@ -511,6 +533,92 @@ export default {
       })
       return focusTime
     },
+
+    calculateCollaborationScore(chatActivityData, emails, meetingsPerApp) {
+      let collaborationScore = 0
+      let chatCollaborationScore = this.calculateChatCollaborationScore(chatActivityData)
+      let calendarCollaborationScore = this.calculateCalendarCollaborationScore(meetingsPerApp)
+
+      return chatCollaborationScore + calendarCollaborationScore + this.meetAdoption / 3
+    },
+    calculateMobilityActivityScore(mobileActivityData) {
+      let mobilityActivityScore = 0
+      let setOfDevices = new Set()
+      let setOfDeviceTypes = new Set()
+      mobileActivityData.forEach((data) => {
+        if (data.events !== undefined) {
+          data.events.forEach((event) => {
+            let deviceID = event.parameters.find(function (obj) {
+              return obj.name === "DEVICE_ID";
+            });
+            let deviceType = event.parameters.find(function (obj) {
+              return obj.name === "DEVICE_TYPE";
+            });
+
+
+            if (deviceID !== undefined) {
+              //console.log("deviceID", deviceID.value)
+              if (deviceID.value !== '') {
+                setOfDevices.add(deviceID.value)
+              }
+            }
+            if (deviceType !== undefined) {
+              //console.log("deviceType", deviceType.value)
+              if (deviceType.value !== '') {
+                setOfDeviceTypes.add(deviceType.value)
+              }
+            }
+          })
+        }
+      })
+      // check if there are mobile devices
+      let hasMobileDevice = setOfDeviceTypes.has("ANDROID") || setOfDeviceTypes.has("IOS")
+      if (hasMobileDevice) {
+        mobilityActivityScore += 20
+      }
+      console.log("hasMobileDevice", hasMobileDevice)
+      console.log("setOfDevices", setOfDevices)
+      console.log("setOfDeviceTypes", setOfDeviceTypes)
+      mobilityActivityScore += setOfDevices.size * 10
+      if (mobilityActivityScore > 100) {
+        mobilityActivityScore = 100
+      }
+      return mobilityActivityScore
+
+
+    },
+    calculateCalendarCollaborationScore(meetingsPerApp) {
+      console.log("meetingsPerApp", meetingsPerApp.hangout.length)
+      if (meetingsPerApp.hangout.length > 9) {
+        return 10
+      } else {
+        return meetingsPerApp.hangout.length
+      }
+    },
+    calculateChatCollaborationScore(chatActivityData) {
+      let chatCollaborationScore = 0
+      chatActivityData.forEach((chat) => {
+        chat.events.forEach((event) => {
+          let room_name = event.parameters.find(function (obj) {
+            return obj.name === "room_name";
+          });
+          if (room_name !== undefined) {
+            if (room_name.value !== '') {
+              chatCollaborationScore += 1
+            }
+
+          } else if (event.name === "room_created" || event.name === "room_joined" || event.name === "room_left" || event.name === "room_deleted" || event.name === "invite_send" || event.name === "room_message" || event.name === "room_created" || event.name === "room_message_updated") {
+            chatCollaborationScore += 1
+          }
+        })
+      })
+      if (chatCollaborationScore > 10) {
+        chatCollaborationScore = 10
+      }
+      return chatCollaborationScore
+    },
+
+
     calculateChatAdoptionScore(chatsThisWeek, chatsOlderThenThisWeek) {
       let chatAdoptionScore = 0
       chatsOlderThenThisWeek.forEach((chat) => {
@@ -612,6 +720,25 @@ export default {
     calculateWorkspaceExperienceScoreLastWeek() {
       return (this.mobilityScoreLastWeek + this.driveAdoptionLastWeek + this.chatAdoptionLastWeek + this.gmailAdoptionLastWeek + this.calendarAdoptionLastWeek) / 5
     },
+    getCalendarActivityData() {
+      let formattedData = [];
+      try {
+        console.log("calendarActivityData", this.userStore.calendarActivityData)
+        for (const chat of this.userStore.calendarActivityData.data) {
+          if (chat.events[0].name !== "direct_message_started") {
+            formattedData.push(
+                {
+                  date: chat.id.time,
+                  events: chat.events
+                }
+            )
+          }
+        }
+        return formattedData
+      } catch (e) {
+        // console.log(e)
+      }
+    },
     getEmailsData() {
       let formattedData = [];
       try {
@@ -648,6 +775,7 @@ export default {
             formattedData.push(
                 {
                   date: chat.id.time,
+                  events: chat.events
                 }
             )
           }
@@ -727,7 +855,7 @@ export default {
       return 0
     },
     getMessagesData() {
-      // console.log("messagesData", messagesData)
+      //console.log("messagesData", typeof messagesData)
       return messagesData
     }
     ,
@@ -760,11 +888,11 @@ export default {
       }
       return filteredDates
     },
-    filterDataOlderThen(chats, date) {
+    filterDataOlderThen(data, date) {
       let filteredDates = []
-      for (let i = 0; i < chats.length; i++) {
-        if (moment(chats[i].date).isBefore(date)) {
-          filteredDates.push(moment(chats[i]))
+      for (let i = 0; i < data.length; i++) {
+        if (moment(data[i].date).isBefore(date)) {
+          filteredDates.push(data[i])
         }
       }
       return filteredDates

@@ -3,7 +3,7 @@
     <v-card-title className="grey--text">{{ title }}</v-card-title>
     <!--            <v-card-subtitle class="grey&#45;&#45;text">Title</v-card-subtitle>-->
     <v-divider></v-divider>
-    <Doughnut :chart-data="data" :chartOptions="options" class="px-4 mt-3"/>
+    <Doughnut :chart-data="data" :chartOptions="options" class="ma-5"/>
   </v-card>
 </template>
 

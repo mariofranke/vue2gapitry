@@ -51,7 +51,7 @@
         <v-switch v-model="$vuetify.theme.dark" color="primary" hide-details @click="toggleDarkMode"></v-switch>
       </div>
       <v-btn v-if="this.getAdminStatus" @click="getX"> Load Reporting Data</v-btn>
-      <v-btn v-if="this.getAdminStatus" @click="getDataX"> Load</v-btn>
+      <!--      <v-btn v-if="this.getAdminStatus" @click="getDataX"> Load</v-btn>-->
 
       <div class="text-center">
         <v-dialog
@@ -129,11 +129,12 @@ import {
   getUserAdminStatus,
   getUserData,
   listGmailActivity,
-  listCalenders, getAllCalenderEntries
+  listCalenders, getAllCalenderEntries, getAllUserKeys
 } from "@/googleApiHelper";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import {useAdminStore} from "@/store/admin";
 
 // Gis / Gapi
 let gapiInited;
@@ -207,7 +208,14 @@ function getData() {
     //console.log("this user", this.getUser())
     const admin = await getUserAdminStatus(this.getUser())
     this.setAdminStatus(admin)
-
+    if (admin
+    ) {
+      console.log("admin", admin)
+      this.getMyUserData(true)
+      let userKeys = await getAllUserKeys()
+      this.setUserKeys(userKeys)
+      console.log("userKeys", userKeys)
+    }
     //await listGmailActivity('me', 10);
     mails = await listGmailActivity(this.getUser())
     console.log("mails", mails)
@@ -221,7 +229,7 @@ function getData() {
     messages = await this.getMessagesforId(this.getUser(), mails)
     console.log("messages", messages)
     this.setEmails(messages)
-    this.getMyUserData()
+    this.getMyUserData(false)
     this.dialog = false
     //document.getElementById("getDataBtn").innerText = "Refresh Calendar";
   }
@@ -311,8 +319,8 @@ export default {
   }),
   setup() {
     const userStore = useLoggedInUserStore();
-
-    return {userStore}
+    const adminStore = useAdminStore()
+    return {userStore, adminStore}
   },
   methods: {
     googleSignIn() {
@@ -343,37 +351,46 @@ export default {
             console.log("user created");
           });
     },
-    getMyUserData() {
+    getKeys() {
+      return this.getAllUserKeys()
+    },
+    getMyUserData(adminStatus) {
+      let collection;
+      if (adminStatus) {
+        collection = "all"
+      } else {
+        collection = this.getUser()
+      }
       firebase
           .firestore()
-          .collection(this.getUser())
+          .collection(collection)
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               switch (doc.id) {
                 case "admin":
-                  this.setAdminActivityData(doc.data())
+                  this.setAdminActivityData(doc.data(), adminStatus)
                   break;
                 case "calendar":
-                  this.setCalendarActivityData(doc.data())
+                  this.setCalendarActivityData(doc.data(), adminStatus)
                   break;
                 case "gmail":
-                  this.setGmailActivityData(doc.data())
+                  this.setGmailActivityData(doc.data(), adminStatus)
                   break;
                 case "drive":
-                  this.setDriveActivityData(doc.data())
+                  this.setDriveActivityData(doc.data(), adminStatus)
                   break;
                 case "mobile":
-                  this.setMobileActivityData(doc.data());
+                  this.setMobileActivityData(doc.data(), adminStatus);
                   break;
                 case "login":
-                  this.setLoginActivityData(doc.data());
+                  this.setLoginActivityData(doc.data(), adminStatus);
                   break;
                 case "chat":
-                  this.setChatActivityData(doc.data());
+                  this.setChatActivityData(doc.data(), adminStatus);
                   break;
                 case "meet":
-                  this.setMeetActivityData(doc.data());
+                  this.setMeetActivityData(doc.data(), adminStatus);
                   break;
               }
               console.log(doc.id, " => ", doc.data());
@@ -385,30 +402,65 @@ export default {
     getData,
     getUserData,
     listCalenders,
-    setAdminActivityData(adminActivityData) {
+    setAdminActivityData(adminActivityData, adminStatus) {
       console.log("adminActivityData", adminActivityData)
-      this.userStore.setAdminActivityData(adminActivityData)
+      console.log("adminStatus", adminStatus)
+      if (adminStatus) {
+        this.adminStore.setAdminActivityData(adminActivityData)
+      } else {
+        this.userStore.setAdminActivityData(adminActivityData)
+      }
     },
-    setCalendarActivityData(calendarActivityData) {
-      this.userStore.setCalendarActivityData(calendarActivityData);
+    setCalendarActivityData(calendarActivityData, adminStatus) {
+      if (adminStatus) {
+        // set calendar activity for all
+        this.adminStore.setCalendarActivityData(calendarActivityData)
+      } else {
+        this.userStore.setCalendarActivityData(calendarActivityData)
+      }
     },
-    setDriveActivityData(driveActivityData) {
-      this.userStore.setDriveActivityData(driveActivityData);
+    setDriveActivityData(driveActivityData, adminStatus) {
+      if (adminStatus) {
+        this.adminStore.setDriveActivityData(driveActivityData)
+      } else {
+        this.userStore.setDriveActivityData(driveActivityData)
+      }
     },
-    setGmailActivityData(gmailActivityData) {
-      this.userStore.setGmailActivityData(gmailActivityData);
+    setGmailActivityData(gmailActivityData, adminStatus) {
+      if (adminStatus) {
+        this.adminStore.setGmailActivityData(gmailActivityData)
+      } else {
+        this.userStore.setGmailActivityData(gmailActivityData)
+      }
     },
-    setMobileActivityData(mobileActivityData) {
-      this.userStore.setMobileActivityData(mobileActivityData);
+
+    setMobileActivityData(mobileActivityData, adminStatus) {
+      if (adminStatus) {
+        this.adminStore.setMobileActivityData(mobileActivityData)
+      } else {
+        this.userStore.setMobileActivityData(mobileActivityData)
+      }
     },
-    setLoginActivityData(loginActivityData) {
-      this.userStore.setLoginActivityData(loginActivityData);
+    setLoginActivityData(loginActivityData, adminStatus) {
+      if (adminStatus) {
+        this.adminStore.setLoginActivityData(loginActivityData)
+      } else {
+        this.userStore.setLoginActivityData(loginActivityData)
+      }
     },
-    setChatActivityData(chatActivityData) {
-      this.userStore.setChatActivityData(chatActivityData);
+    setChatActivityData(chatActivityData, adminStatus) {
+      if (adminStatus) {
+        this.adminStore.setChatActivityData(chatActivityData)
+      } else {
+        this.userStore.setChatActivityData(chatActivityData)
+      }
     },
-    setMeetActivityData(meetActivityData) {
-      this.userStore.setMeetActivityData(meetActivityData);
+    setMeetActivityData(meetActivityData, adminStatus) {
+      if (adminStatus) {
+        this.adminStore.setMeetActivityData(meetActivityData)
+      } else {
+        this.userStore.setMeetActivityData(meetActivityData)
+      }
     },
 
 
@@ -430,6 +482,10 @@ export default {
     },
     setUsers(users) {
       this.userStore.setUsers(users)
+    },
+    setUserKeys(userKeys) {
+      console.log("userKeys", userKeys)
+      this.adminStore.setUserKeys(userKeys)
     },
 
     setUserData(userData) {
@@ -459,7 +515,8 @@ export default {
     toggleDarkMode() {
       this.userStore.toggleDarkMode()
     },
-  },
+  }
+  ,
   async mounted() {
     gapiLoad()
     gisInit()
@@ -468,8 +525,10 @@ export default {
     } else {
       this.$vuetify.theme.dark = false
     }
-  },
-};
+  }
+  ,
+}
+;
 </script>
 
 <style scoped>
