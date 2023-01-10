@@ -4,7 +4,7 @@
       <v-row>
 
         <v-col>
-          <h1 class="text-center grey--text">Global Indicators</h1>
+          <h1 class="text-center grey--text">Team Indicators</h1>
         </v-col>
       </v-row>
       <v-row>
@@ -50,7 +50,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <h1 class="text-center grey--text">Team</h1>
+          <h1 class="text-center grey--text">Team in Detail</h1>
         </v-col>
       </v-row>
       <v-row>

@@ -152,8 +152,8 @@
       </v-row>
       <v-row>
         <ScoreCard
-            :metric=focusTime
-            :percent="getFocusTimePercentage()"
+            :metric="0"
+            :percent="20"
             help_btn
             help_btn_scr="https://support.google.com/calendar/answer/11190973?hl=en&co=GENIE.Platform%3DDesktop"
             help_btn_text="Learn how to use Focus Time"
@@ -161,12 +161,12 @@
             help_title="Focus Time"
             icon="mdi-headphones"
             icon_color="blue darken-2"
-            metric_text="hours this Week"
+            metric_text="hours this week"
             title="Focus time"/>
 
         <ScoreCard
             :metric=timeInMeetings
-            :percent="getTimeinMeetingsPercentage()"
+            :percent="30"
             help_btn
             help_btn_scr="https://www.calendar.com/blog/perfect-amount-of-meetings-per-day-backed-by-science"
             help_btn_text="Read More"
@@ -430,7 +430,7 @@ export default {
       datasets: [
         {
           label: 'Chats',
-          data: [chatsLastLastWeek.length, chatsLastWeek.length, chatsThisWeek.length],
+          data: [3, 2, 5],
           backgroundColor: '#8e5ea2',
           borderColor: '#8e5ea2',
           borderWidth: 1,
@@ -438,7 +438,7 @@ export default {
         },
         {
           label: 'Emails',
-          data: [EmailsLastLastWeek.length, EmailsLastWeek.length, EmailsThisWeek.length],
+          data: [3, 4, 1],
           backgroundColor: '#3e95cd',
           borderColor: '#3e95cd',
           borderWidth: 1,
