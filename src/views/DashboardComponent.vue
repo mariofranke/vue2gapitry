@@ -10,8 +10,8 @@
       <v-row>
 
         <ScoreCard
-            :metric="workspaceExperienceScoreIncrease"
-            :percent="workspaceExperienceScore"
+            :metric="30"
+            :percent="10"
             dark-mode="true"
             help_text='The Score shows your usage of Google Workspace. The higher the score, the more you use Google
                               Workspace and its tools.
@@ -24,8 +24,8 @@
             title="Workspace Adaption Score"
         />
         <ScoreCard
-            :metric="collaborationScoreIncrease"
-            :percent="collaborationScore"
+            :metric="20"
+            :percent="5"
             help_text='The Score shows your usage of Collaboration inside Google Workspace. The higher the score,
                               the more you use the collaboration tools inside Google
                               Workspace.
@@ -38,8 +38,8 @@
             title="Collaboration Score"
         />
         <ScoreCard
-            :metric="mobilityScoreIncrease"
-            :percent="mobilityScore"
+            :metric="90"
+            :percent="30"
             help_text='The Score shows your usage of Google Workspace. The Score is based of the amount of Devices you use and if you use an mobile device.'
             help_title="Scoring"
             icon="mdi-cellphone-link"
@@ -61,8 +61,8 @@
       <v-row>
 
         <ScoreCard
-            :metric="gmailAdoptionIncrease"
-            :percent="gmailAdoption"
+            :metric="20"
+            :percent="10"
             googlelogo="Gmail"
             help_btn
             help_btn_scr="https://mail.google.com/mail/u/0/"
